@@ -62,8 +62,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);min-
 .s-opt{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:0.5px solid var(--border-strong);background:transparent;cursor:pointer;transition:all 0.15s;text-align:left;width:100%;font-family:'Jost',sans-serif;}
 .s-opt:hover{border-color:var(--gold);background:var(--gold-pale);}
 .s-opt.selected{border-color:var(--gold);background:var(--gold);}
-.s-opt.selected .s-opt-label{color:var(--cream);}
-.s-opt.selected .s-opt-text{color:var(--cream);}
+.s-opt.selected .s-opt-label,.s-opt.selected .s-opt-text{color:var(--cream);}
 .s-opt-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:16px;flex-shrink:0;padding-top:1px;}
 .s-opt-text{font-size:13px;color:var(--ink-mid);line-height:1.6;}
 .btn{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:500;padding:14px 32px;border:0.5px solid var(--border-strong);background:transparent;color:var(--ink);cursor:pointer;transition:all 0.2s;}
@@ -137,34 +136,15 @@ select{font-family:'Jost',sans-serif;font-size:13px;padding:10px 14px;border:0.5
     <p class="subtitle">Understand your natural role in venture creation — how you build, think, handle capital, and who you partner best with.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:40px;">
-    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);">
-      <div class="section-label">Sections</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">6 modules</div>
-    </div>
-    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);">
-      <div class="section-label">Format</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">36 Qs + 8 scenarios</div>
-    </div>
-    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);">
-      <div class="section-label">Output</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">Full founder profile</div>
-    </div>
+    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);"><div class="section-label">Sections</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">6 modules</div></div>
+    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);"><div class="section-label">Format</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">36 Qs + 8 scenarios</div></div>
+    <div style="padding:20px;border:0.5px solid var(--border);background:var(--cream-dark);"><div class="section-label">Output</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);">Full founder profile</div></div>
   </div>
-  <div style="padding:20px;border-left:2px solid var(--gold);margin-bottom:40px;font-size:13px;color:var(--ink-light);line-height:1.7;">
-    A strategic tool for building aligned ventures. Answer based on how you actually build — not how you aspire to build.
-  </div>
+  <div style="padding:20px;border-left:2px solid var(--gold);margin-bottom:40px;font-size:13px;color:var(--ink-light);line-height:1.7;">A strategic tool for building aligned ventures. Answer based on how you actually build — not how you aspire to build.</div>
   <div class="section-label" style="margin-bottom:16px;">Before we begin</div>
   <div class="gate-grid">
-    <div class="field">
-      <label>First name</label>
-      <input type="text" id="gate-name" placeholder="Your name"/>
-      <div class="error-msg" id="err-name" style="display:none;">Please enter your name</div>
-    </div>
-    <div class="field">
-      <label>Email address</label>
-      <input type="email" id="gate-email" placeholder="you@example.com"/>
-      <div class="error-msg" id="err-email" style="display:none;">Please enter a valid email</div>
-    </div>
+    <div class="field"><label>First name</label><input type="text" id="gate-name" placeholder="Your name"/><div class="error-msg" id="err-name" style="display:none;">Please enter your name</div></div>
+    <div class="field"><label>Email address</label><input type="email" id="gate-email" placeholder="you@example.com"/><div class="error-msg" id="err-email" style="display:none;">Please enter a valid email</div></div>
   </div>
   <button class="btn btn-primary" onclick="startQuiz()">Begin Assessment →</button>
 </div>
@@ -240,62 +220,14 @@ const QUESTIONS=[
 ];
 
 const SCENARIOS=[
-  {id:'s1',tag:'Cash & Runway',text:"You have three months of runway left and revenue is coming in slower than projected. What do you do first?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Immediately audit every expense, cut non-essentials, and build a survival budget to extend runway as long as possible."},
-      {label:'B',pattern:'Accelerator',text:"Double down on sales activity — more outreach, more calls, more closes. Revenue is the only real solution."},
-      {label:'C',pattern:'Adapter',text:"Step back and ask whether the current offer or pricing model needs to change. The market may be telling you something."},
-      {label:'D',pattern:'Connector',text:"Reach out to your network — advisors, investors, strategic partners — to explore bridge options and outside perspective."},
-    ]},
-  {id:'s2',tag:'Launch Performance',text:"You've launched something you believed in deeply. Early results are significantly below expectations. How do you respond?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Slow down, document what happened, and diagnose the gap between your assumptions and reality before making any moves."},
-      {label:'B',pattern:'Accelerator',text:"Push harder on distribution and marketing. The product is right — it just needs more exposure and momentum."},
-      {label:'C',pattern:'Adapter',text:"Treat the launch data as research. Start testing different positioning, audiences, or offer structures immediately."},
-      {label:'D',pattern:'Connector',text:"Get on calls with potential customers who didn't convert and with trusted peers who can give you honest outside feedback."},
-    ]},
-  {id:'s3',tag:'Partnership Breakdown',text:"A key partner or collaborator is not delivering on their commitments and the relationship is becoming strained. What do you do?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Schedule a direct conversation, document the gaps clearly, and establish a formal accountability structure going forward."},
-      {label:'B',pattern:'Accelerator',text:"Take back ownership of whatever they're responsible for and move forward. You can't let one relationship slow the whole venture."},
-      {label:'C',pattern:'Adapter',text:"Reassess whether the partnership structure itself needs to change — maybe roles, incentives, or scope need to be redesigned."},
-      {label:'D',pattern:'Connector',text:"Bring in a neutral third party — a mutual advisor or mentor — to facilitate the conversation and help you both find resolution."},
-    ]},
-  {id:'s4',tag:'Pricing Pressure',text:"Clients are consistently pushing back on your pricing and you're losing deals you expected to close. What's your move?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Hold the pricing and review your sales process. If the value is real, the issue is likely in how it's being communicated."},
-      {label:'B',pattern:'Accelerator',text:"Create urgency — limited time offers, payment plans, or bonuses that make it easier to say yes without dropping your rate."},
-      {label:'C',pattern:'Adapter',text:"Reframe the offer entirely — new packaging, different tiers, or a repositioned entry point that meets clients where they are."},
-      {label:'D',pattern:'Connector',text:"Talk to the clients who said no and a few who said yes. Let real feedback inform the next version of your pricing strategy."},
-    ]},
-  {id:'s5',tag:'Opportunity Overwhelm',text:"Three strong opportunities have emerged at the same time. You don't have the capacity to pursue all of them. What do you do?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Build a simple scoring framework — strategic fit, revenue potential, resource requirement — and let the analysis decide."},
-      {label:'B',pattern:'Accelerator',text:"Find a way to say yes to all three. Hire fast, delegate, or find partners. Missing opportunities costs more than strain."},
-      {label:'C',pattern:'Adapter',text:"Look for the one opportunity that could make the other two irrelevant or easier. Pursue that one with full focus."},
-      {label:'D',pattern:'Connector',text:"Bring trusted people into the conversation — advisors, potential collaborators — to help you evaluate and possibly co-pursue."},
-    ]},
-  {id:'s6',tag:'Co-founder Conflict',text:"You and a co-founder are at a strategic impasse. You've discussed it multiple times and neither of you is moving. What happens next?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Agree to pause the decision, document both positions clearly, and set a defined timeline for reaching a resolution together."},
-      {label:'B',pattern:'Accelerator',text:"Make a call. Prolonged indecision costs more than an imperfect decision. One of you needs to take the lead and move."},
-      {label:'C',pattern:'Adapter',text:"Reframe the question. Ask whether you're solving the right problem — an impasse often reveals a deeper misalignment worth addressing."},
-      {label:'D',pattern:'Connector',text:"Bring in an advisor, board member, or trusted mentor who can offer perspective and help you both get unstuck."},
-    ]},
-  {id:'s7',tag:'Competitive Threat',text:"A well-funded competitor just announced a product that looks very similar to your core offering. How do you react?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Do a thorough competitive analysis first. Understand exactly what they're building before changing anything about your strategy."},
-      {label:'B',pattern:'Accelerator',text:"Accelerate your roadmap and go-to-market. Speed is your advantage — get to market and lock in customers before they do."},
-      {label:'C',pattern:'Adapter',text:"Use this as a forcing function to sharpen your differentiation. Find the angle they can't easily copy and double down on it."},
-      {label:'D',pattern:'Connector',text:"Reach out to your existing customers and community. Their loyalty and feedback will tell you exactly where to focus."},
-    ]},
-  {id:'s8',tag:'Capital Terms',text:"An investor has capital ready for you, but the terms are aggressive — significant control provisions and less ownership than expected. What do you do?",
-    options:[
-      {label:'A',pattern:'Stabilizer',text:"Take the time to fully understand every clause. Get legal counsel, model the scenarios, and don't let urgency pressure the decision."},
-      {label:'B',pattern:'Accelerator',text:"Negotiate hard on the key terms and move quickly. Capital is a tool — the opportunity cost of waiting is usually worse than imperfect terms."},
-      {label:'C',pattern:'Adapter',text:"Step back and ask whether this is the right capital source at all. Explore whether a different structure or investor would be a better fit."},
-      {label:'D',pattern:'Connector',text:"Talk to founders who've worked with this investor before. Their real experience matters more than the term sheet language."},
-    ]},
+  {id:'s1',tag:'Cash & Runway',text:"You have three months of runway left and revenue is coming in slower than projected. What do you do first?",options:[{label:'A',pattern:'Stabilizer',text:"Immediately audit every expense, cut non-essentials, and build a survival budget to extend runway as long as possible."},{label:'B',pattern:'Accelerator',text:"Double down on sales activity — more outreach, more calls, more closes. Revenue is the only real solution."},{label:'C',pattern:'Adapter',text:"Step back and ask whether the current offer or pricing model needs to change. The market may be telling you something."},{label:'D',pattern:'Connector',text:"Reach out to your network — advisors, investors, strategic partners — to explore bridge options and outside perspective."}]},
+  {id:'s2',tag:'Launch Performance',text:"You've launched something you believed in deeply. Early results are significantly below expectations. How do you respond?",options:[{label:'A',pattern:'Stabilizer',text:"Slow down, document what happened, and diagnose the gap between your assumptions and reality before making any moves."},{label:'B',pattern:'Accelerator',text:"Push harder on distribution and marketing. The product is right — it just needs more exposure and momentum."},{label:'C',pattern:'Adapter',text:"Treat the launch data as research. Start testing different positioning, audiences, or offer structures immediately."},{label:'D',pattern:'Connector',text:"Get on calls with potential customers who didn't convert and with trusted peers who can give you honest outside feedback."}]},
+  {id:'s3',tag:'Partnership Breakdown',text:"A key partner or collaborator is not delivering on their commitments and the relationship is becoming strained. What do you do?",options:[{label:'A',pattern:'Stabilizer',text:"Schedule a direct conversation, document the gaps clearly, and establish a formal accountability structure going forward."},{label:'B',pattern:'Accelerator',text:"Take back ownership of whatever they're responsible for and move forward. You can't let one relationship slow the whole venture."},{label:'C',pattern:'Adapter',text:"Reassess whether the partnership structure itself needs to change — maybe roles, incentives, or scope need to be redesigned."},{label:'D',pattern:'Connector',text:"Bring in a neutral third party — a mutual advisor or mentor — to facilitate the conversation and help you both find resolution."}]},
+  {id:'s4',tag:'Pricing Pressure',text:"Clients are consistently pushing back on your pricing and you're losing deals you expected to close. What's your move?",options:[{label:'A',pattern:'Stabilizer',text:"Hold the pricing and review your sales process. If the value is real, the issue is likely in how it's being communicated."},{label:'B',pattern:'Accelerator',text:"Create urgency — limited time offers, payment plans, or bonuses that make it easier to say yes without dropping your rate."},{label:'C',pattern:'Adapter',text:"Reframe the offer entirely — new packaging, different tiers, or a repositioned entry point that meets clients where they are."},{label:'D',pattern:'Connector',text:"Talk to the clients who said no and a few who said yes. Let real feedback inform the next version of your pricing strategy."}]},
+  {id:'s5',tag:'Opportunity Overwhelm',text:"Three strong opportunities have emerged at the same time. You don't have the capacity to pursue all of them. What do you do?",options:[{label:'A',pattern:'Stabilizer',text:"Build a simple scoring framework — strategic fit, revenue potential, resource requirement — and let the analysis decide."},{label:'B',pattern:'Accelerator',text:"Find a way to say yes to all three. Hire fast, delegate, or find partners. Missing opportunities costs more than strain."},{label:'C',pattern:'Adapter',text:"Look for the one opportunity that could make the other two irrelevant or easier. Pursue that one with full focus."},{label:'D',pattern:'Connector',text:"Bring trusted people into the conversation — advisors, potential collaborators — to help you evaluate and possibly co-pursue."}]},
+  {id:'s6',tag:'Co-founder Conflict',text:"You and a co-founder are at a strategic impasse. You've discussed it multiple times and neither of you is moving. What happens next?",options:[{label:'A',pattern:'Stabilizer',text:"Agree to pause the decision, document both positions clearly, and set a defined timeline for reaching a resolution together."},{label:'B',pattern:'Accelerator',text:"Make a call. Prolonged indecision costs more than an imperfect decision. One of you needs to take the lead and move."},{label:'C',pattern:'Adapter',text:"Reframe the question. Ask whether you're solving the right problem — an impasse often reveals a deeper misalignment worth addressing."},{label:'D',pattern:'Connector',text:"Bring in an advisor, board member, or trusted mentor who can offer perspective and help you both get unstuck."}]},
+  {id:'s7',tag:'Competitive Threat',text:"A well-funded competitor just announced a product that looks very similar to your core offering. How do you react?",options:[{label:'A',pattern:'Stabilizer',text:"Do a thorough competitive analysis first. Understand exactly what they're building before changing anything about your strategy."},{label:'B',pattern:'Accelerator',text:"Accelerate your roadmap and go-to-market. Speed is your advantage — get to market and lock in customers before they do."},{label:'C',pattern:'Adapter',text:"Use this as a forcing function to sharpen your differentiation. Find the angle they can't easily copy and double down on it."},{label:'D',pattern:'Connector',text:"Reach out to your existing customers and community. Their loyalty and feedback will tell you exactly where to focus."}]},
+  {id:'s8',tag:'Capital Terms',text:"An investor has capital ready for you, but the terms are aggressive — significant control provisions and less ownership than expected. What do you do?",options:[{label:'A',pattern:'Stabilizer',text:"Take the time to fully understand every clause. Get legal counsel, model the scenarios, and don't let urgency pressure the decision."},{label:'B',pattern:'Accelerator',text:"Negotiate hard on the key terms and move quickly. Capital is a tool — the opportunity cost of waiting is usually worse than imperfect terms."},{label:'C',pattern:'Adapter',text:"Step back and ask whether this is the right capital source at all. Explore whether a different structure or investor would be a better fit."},{label:'D',pattern:'Connector',text:"Talk to founders who've worked with this investor before. Their real experience matters more than the term sheet language."}]},
 ];
 
 const SECTIONS=[
@@ -304,7 +236,7 @@ const SECTIONS=[
   {label:"Section III",title:"Stress & Collaboration",desc:"How you respond under pressure and work with others.",type:'likert',qs:[18,19,20,21,22,23]},
   {label:"Section IV",title:"Ecosystem & Connection",desc:"Your natural role in building relationships and networks.",type:'likert',qs:[24,25,26,27]},
   {label:"Section V",title:"Capital Philosophy",desc:"How you think about money, capital, and financial strategy.",type:'likert',qs:[28,29,30,31,32,33,34,35]},
-  {label:"Section VI",title:"Founder Under Pressure",desc:"Eight real scenarios. Choose the response that most honestly reflects what you would actually do — not what sounds best.",type:'scenario',scenarios:[0,1,2,3,4,5,6,7]},
+  {label:"Section VI",title:"Founder Under Pressure",desc:"Eight real scenarios. Choose the response that most honestly reflects what you would actually do.",type:'scenario',scenarios:[0,1,2,3,4,5,6,7]},
 ];
 
 const TOTAL_Q=44;
@@ -331,16 +263,32 @@ const PRESSURE_PATTERNS={
   Connector:{color:'#185FA5',desc:"Under pressure you bring people in. You seek outside perspective, facilitate conversation, and build toward collective solutions. You rarely go it alone and that makes you resilient. Watch for decision paralysis when consensus is slow or unavailable."},
 };
 
-let answers={},scenarioAnswers={},currentSection=0,profile=null,userName='',userEmail='';
+let answers={},scenarioAnswers={},currentSection=0,profile=null,userName='',userEmail='',airtableRecordId='';
 
 emailjs.init(CONFIG.emailjsPublicKey);
 
-window.addEventListener('DOMContentLoaded',()=>{
+// ── SHARED PROFILE LOADER ────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',async()=>{
   const params=new URLSearchParams(window.location.search);
-  const shared=params.get('profile');
-  if(shared){try{const d=JSON.parse(atob(shared));profile=d.profile;userName=d.name||'Founder';userEmail=d.email||'';answers=d.answers||{};scenarioAnswers=d.scenarioAnswers||{};document.getElementById('screen-intro').style.display='none';renderResults(true);}catch(e){}}
+  const recordId=params.get('id');
+  if(recordId){
+    const ov=document.createElement('div');ov.className='loading-overlay';ov.innerHTML='<div class="loading-spinner"></div><div class="loading-text">Loading profile...</div>';document.body.appendChild(ov);
+    try{
+      const res=await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}/${recordId}`,{headers:{'Authorization':`Bearer ${CONFIG.airtableToken}`}});
+      const data=await res.json();
+      if(data.fields&&data.fields['Profile JSON']){
+        const stored=JSON.parse(data.fields['Profile JSON']);
+        profile=stored.profile;userName=stored.name||'Founder';userEmail='';
+        answers=stored.answers||{};scenarioAnswers=stored.scenarioAnswers||{};
+        document.body.removeChild(ov);
+        document.getElementById('screen-intro').style.display='none';
+        renderResults(true,`${CONFIG.siteUrl}?id=${recordId}`);
+      }else{document.body.removeChild(ov);}
+    }catch(e){document.body.removeChild(ov);console.warn('Failed to load profile:',e);}
+  }
 });
 
+// ── GATE ─────────────────────────────────────────────────────────────────────
 function startQuiz(){
   const n=document.getElementById('gate-name'),e=document.getElementById('gate-email');let ok=true;
   if(!n.value.trim()){n.classList.add('field-error');document.getElementById('err-name').style.display='block';ok=false;}else{n.classList.remove('field-error');document.getElementById('err-name').style.display='none';}
@@ -352,6 +300,7 @@ function startQuiz(){
   renderSection();
 }
 
+// ── QUIZ ─────────────────────────────────────────────────────────────────────
 function renderSection(){
   const sec=SECTIONS[currentSection];
   document.getElementById('quiz-section-label').textContent=sec.label;
@@ -402,6 +351,7 @@ function updateNav(){
 function nextSection(){if(currentSection<SECTIONS.length-1){currentSection++;renderSection();}else{computeAndShowResults();}}
 function prevSection(){if(currentSection>0){currentSection--;renderSection();}}
 
+// ── SCORING ──────────────────────────────────────────────────────────────────
 function r(qid){return answers[qid]||3;}
 function rev(qid){return 6-r(qid);}
 
@@ -435,28 +385,75 @@ function computeProfile(){
   return{roleScores,sorted,primaryRole,secondaryRole,profileType,dims,flags,capitalDims,moneyArchetype,patternCounts,patternSorted,dominantPattern,partnerMap,mapX,mapY};
 }
 
-function buildShareLink(p){return`${CONFIG.siteUrl}?profile=${encodeURIComponent(btoa(JSON.stringify({profile:p,name:userName,email:'',answers,scenarioAnswers})))}`;}
-
-async function logToAirtable(p,sl){
-  try{await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}`,{method:'POST',headers:{'Authorization':`Bearer ${CONFIG.airtableToken}`,'Content-Type':'application/json'},body:JSON.stringify({fields:{'Name':userName,'Email':userEmail,'Primary Role':p.primaryRole,'Secondary Role':p.secondaryRole||'None','Profile Type':p.profileType,'Venture Seat':ROLES[p.primaryRole].seat,'Ideal Partner':p.partnerMap[p.primaryRole],'Role Scores':p.sorted.map(([r,s])=>`${r}: ${s}`).join(' | '),'Top Traits':Object.entries(p.dims).sort((a,b)=>b[1]-a[1]).slice(0,3).map(d=>d[0]).join(', '),'Awareness Signals':p.flags.map(f=>f.name).join(', ')||'None','Submitted At':new Date().toISOString(),'Share Link':sl,'Money Archetype':p.moneyArchetype,'Pressure Pattern':p.dominantPattern}})});}catch(e){console.warn('Airtable:',e);}
+// ── AIRTABLE — save and return record ID ─────────────────────────────────────
+async function saveToAirtable(p){
+  const topDims=Object.entries(p.dims).sort((a,b)=>b[1]-a[1]).slice(0,3).map(d=>d[0]).join(', ');
+  const flagNames=p.flags.map(f=>f.name).join(', ')||'None';
+  const profileJSON=JSON.stringify({profile:p,name:userName,answers,scenarioAnswers});
+  try{
+    const res=await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}`,{
+      method:'POST',
+      headers:{'Authorization':`Bearer ${CONFIG.airtableToken}`,'Content-Type':'application/json'},
+      body:JSON.stringify({fields:{
+        'Name':userName,'Email':userEmail,
+        'Primary Role':p.primaryRole,'Secondary Role':p.secondaryRole||'None',
+        'Profile Type':p.profileType,'Venture Seat':ROLES[p.primaryRole].seat,
+        'Ideal Partner':p.partnerMap[p.primaryRole],
+        'Role Scores':p.sorted.map(([role,score])=>`${role}: ${score}`).join(' | '),
+        'Top Traits':topDims,'Awareness Signals':flagNames,
+        'Submitted At':new Date().toISOString(),
+        'Money Archetype':p.moneyArchetype,'Pressure Pattern':p.dominantPattern,
+        'Profile JSON':profileJSON,
+      }})
+    });
+    const data=await res.json();
+    if(data.id){
+      // Update Share Link field with the clean short URL
+      const shareLink=`${CONFIG.siteUrl}?id=${data.id}`;
+      await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}/${data.id}`,{
+        method:'PATCH',
+        headers:{'Authorization':`Bearer ${CONFIG.airtableToken}`,'Content-Type':'application/json'},
+        body:JSON.stringify({fields:{'Share Link':shareLink}})
+      });
+      return data.id;
+    }
+  }catch(e){console.warn('Airtable save failed:',e);}
+  return null;
 }
-async function sendResultsEmail(p,sl){
-  try{await emailjs.send(CONFIG.emailjsServiceId,CONFIG.emailjsTemplateId,{to_name:userName,to_email:userEmail,primary_role:p.primaryRole,secondary_role:p.secondaryRole||'None identified',profile_type:p.profileType,venture_seat:ROLES[p.primaryRole].seat,ideal_partner:p.partnerMap[p.primaryRole],share_link:sl});}catch(e){console.warn('Email:',e);}
+
+// ── EMAILJS ───────────────────────────────────────────────────────────────────
+async function sendResultsEmail(p,shareLink){
+  try{
+    await emailjs.send(CONFIG.emailjsServiceId,CONFIG.emailjsTemplateId,{
+      to_name:userName,to_email:userEmail,
+      primary_role:p.primaryRole,secondary_role:p.secondaryRole||'None identified',
+      profile_type:p.profileType,venture_seat:ROLES[p.primaryRole].seat,
+      ideal_partner:p.partnerMap[p.primaryRole],
+      share_link:shareLink,
+    });
+  }catch(e){console.warn('Email send failed:',e);}
 }
 
+// ── COMPUTE + SHOW ────────────────────────────────────────────────────────────
 async function computeAndShowResults(){
   document.getElementById('screen-quiz').style.display='none';
   const ov=document.createElement('div');ov.className='loading-overlay';ov.innerHTML='<div class="loading-spinner"></div><div class="loading-text">Building your profile...</div>';document.body.appendChild(ov);
-  profile=computeProfile();const sl=buildShareLink(profile);
-  await Promise.all([logToAirtable(profile,sl),sendResultsEmail(profile,sl)]);
-  document.body.removeChild(ov);renderResults(false,sl);
+  profile=computeProfile();
+  // Save to Airtable first to get the record ID → build short link
+  const recordId=await saveToAirtable(profile);
+  airtableRecordId=recordId||'';
+  const shareLink=recordId?`${CONFIG.siteUrl}?id=${recordId}`:`${CONFIG.siteUrl}`;
+  // Send email with the clean short link
+  await sendResultsEmail(profile,shareLink);
+  document.body.removeChild(ov);
+  renderResults(false,shareLink);
 }
 
+// ── RESULTS ───────────────────────────────────────────────────────────────────
 function renderResults(isShared=false,shareLink=''){
   const rs=document.getElementById('screen-results');rs.style.display='block';
   const pc=ROLES[profile.primaryRole].color;
   const topDims=Object.entries(profile.dims).sort((a,b)=>b[1]-a[1]).slice(0,3).map(d=>d[0]);
-  if(!shareLink)shareLink=buildShareLink(profile);
   const ma=MONEY_ARCHETYPES[profile.moneyArchetype];
   const pp=PRESSURE_PATTERNS[profile.dominantPattern];
 
@@ -512,9 +509,7 @@ function renderResults(isShared=false,shareLink=''){
       <div class="section-label" style="margin-bottom:16px;">Capital Dimensions</div>
       ${Object.entries(profile.capitalDims).map(([dim,score])=>`<div class="role-bar-row"><div class="role-bar-label">${dim}</div><div class="role-bar-track"><div class="role-bar-fill" style="width:${score/10*100}%;background:var(--gold)"></div></div><div class="role-bar-score">${score}</div></div>`).join('')}
     </div>
-    <div style="margin-top:24px;padding:16px;border-left:2px solid var(--gold);font-size:13px;color:var(--ink-light);line-height:1.7;">
-      <strong style="color:var(--ink-mid);">Low score</strong> = conservative · bootstrap · protective · revenue-first &nbsp;|&nbsp; <strong style="color:var(--ink-mid);">High score</strong> = aggressive · raise · invest to grow · equity-minded
-    </div>
+    <div style="margin-top:24px;padding:16px;border-left:2px solid var(--gold);font-size:13px;color:var(--ink-light);line-height:1.7;"><strong style="color:var(--ink-mid);">Low score</strong> = conservative · bootstrap · protective · revenue-first &nbsp;|&nbsp; <strong style="color:var(--ink-mid);">High score</strong> = aggressive · raise · invest to grow · equity-minded</div>
   </div>
 
   <div class="tab-content" id="tab-pressure">
@@ -585,11 +580,11 @@ function renderResults(isShared=false,shareLink=''){
     <div class="section-desc">Send your profile to a potential partner. They can view your results and run a compatibility check.</div>
     <div class="share-box" style="margin-top:24px;">
       <div class="rc-label" style="margin-bottom:8px;">Your shareable link</div>
-      <div class="share-url">${shareLink}</div>
-      <button class="copy-btn" onclick="copyShareLink('${shareLink.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}')">Copy Link</button>
+      <div class="share-url" id="share-url-display">${shareLink}</div>
+      <button class="copy-btn" onclick="copyShareLink()">Copy Link</button>
     </div>
     <div style="margin-top:24px;padding:20px;border-left:2px solid var(--gold);font-size:13px;color:var(--ink-light);line-height:1.7;">
-      Your results email has been sent to <strong>${userEmail}</strong> — check your inbox.
+      Your results email has been sent to <strong>${userEmail}</strong> — check your inbox. The link in the email goes directly to this profile page.
     </div>
   </div>`:''}
 
@@ -600,6 +595,7 @@ function renderResults(isShared=false,shareLink=''){
   window.scrollTo(0,0);
 }
 
+// ── COMPATIBILITY ─────────────────────────────────────────────────────────────
 function computeCompatibility(roleA,roleB){
   const cp={'Visionary-Operator':5,'Visionary-Capital Strategist':4,'Visionary-Builder':3,'Visionary-Connector':4,'Visionary-Visionary':2,'Operator-Builder':4,'Operator-Connector':3,'Operator-Capital Strategist':3,'Operator-Operator':2,'Builder-Capital Strategist':3,'Builder-Connector':3,'Builder-Builder':2,'Capital Strategist-Connector':4,'Capital Strategist-Capital Strategist':1,'Connector-Connector':2};
   const key=[roleA,roleB].sort().join('-');const rc=cp[key]||2;
@@ -618,13 +614,13 @@ function computeCompatibility(roleA,roleB){
   if(total>=26)band='Exceptional Fit';else if(total>=20)band='Strong Partnership';else if(total>=14)band='Conditional Partnership';
   return{dims:[{label:'Role Complement',score:rc},{label:'Decision Match',score:dm},{label:'Communication Fit',score:cf},{label:'Stress Fit',score:sf},{label:'Power Balance',score:pb},{label:'Network Synergy',score:ns}],total,band};
 }
-
 function renderCompatibility(){
   const pr=document.getElementById('partner-role-select').value;if(!pr)return;
   const compat=computeCompatibility(profile.primaryRole,pr);const pct=Math.round(compat.total/30*100);
   document.getElementById('compat-result').innerHTML=`<div style="margin-top:24px;"><svg style="display:block;margin:0 auto 24px;width:120px;height:120px;" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="60" cy="60" r="50" fill="none" stroke="${ROLES[profile.primaryRole].color}" stroke-width="6" stroke-dasharray="${Math.round(314*pct/100)} 314" stroke-dashoffset="78.5" stroke-linecap="round"/><text x="60" y="55" text-anchor="middle" style="font-family:'Cormorant Garamond',serif;font-size:28px;fill:var(--ink);">${compat.total}</text><text x="60" y="72" text-anchor="middle" style="font-family:Jost;font-size:9px;fill:var(--ink-light);letter-spacing:1px;">OUT OF 30</text></svg><div class="compat-band">${compat.band}</div><div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-light);text-align:center;margin-bottom:24px;">${profile.primaryRole} × ${pr}</div>${compat.dims.map(d=>`<div class="dim-row"><span class="dim-label">${d.label}</span><span class="dim-score">${d.score} / 5</span></div>`).join('')}</div>`;
 }
 
+// ── AI ─────────────────────────────────────────────────────────────────────
 async function fetchAIInterpretation(){
   const el=document.getElementById('ai-result');
   el.innerHTML=`<div class="ai-section"><div class="ai-label"><div class="ai-dot"></div>Generating your strategic profile...</div><div class="ai-text" style="color:var(--ink-light);font-style:italic;">Analyzing all dimensions...</div></div>`;
@@ -672,10 +668,14 @@ Paragraph 4: Their ideal venture partnership — what kind of collaborator compl
   }catch(e){el.innerHTML=`<div class="ai-section"><div class="ai-label">Interpretation</div><div class="ai-text" style="color:var(--ink-light);">Unable to connect. Please try again.</div><button class="btn" style="margin-top:16px;" onclick="fetchAIInterpretation()">Retry →</button></div>`;}
 }
 
+// ── UTILS ─────────────────────────────────────────────────────────────────────
 function switchTab(e,name){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');document.getElementById('tab-'+name).classList.add('active');}
-function copyShareLink(url){navigator.clipboard.writeText(url).then(()=>showToast('Link copied to clipboard'));}
+function copyShareLink(){
+  const url=document.getElementById('share-url-display').textContent;
+  navigator.clipboard.writeText(url).then(()=>showToast('Link copied to clipboard'));
+}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-function retakeQuiz(){answers={};scenarioAnswers={};profile=null;currentSection=0;document.getElementById('screen-results').style.display='none';document.getElementById('screen-intro').style.display='block';document.getElementById('gate-name').value='';document.getElementById('gate-email').value='';window.scrollTo(0,0);}
+function retakeQuiz(){answers={};scenarioAnswers={};profile=null;currentSection=0;airtableRecordId='';document.getElementById('screen-results').style.display='none';document.getElementById('screen-intro').style.display='block';document.getElementById('gate-name').value='';document.getElementById('gate-email').value='';window.scrollTo(0,0);}
 </script>
 </body>
 </html>
