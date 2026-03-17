@@ -386,11 +386,11 @@ function computeProfile(){
 }
 
 // ── AIRTABLE — save and return record ID ─────────────────────────────────────
-async function saveToAirtable(p){
+async function saveToAirtable(p, shareLink){
   const topDims=Object.entries(p.dims).sort((a,b)=>b[1]-a[1]).slice(0,3).map(d=>d[0]).join(', ');
   const flagNames=p.flags.map(f=>f.name).join(', ')||'None';
   const profileJSONFull=JSON.stringify({profile:p,name:userName,answers,scenarioAnswers});
-  const profileJSON=profileJSONFull.length>95000?profileJSONFull.substring(0,95000)+'...truncated':profileJSONFull;
+  const profileJSON=profileJSONFull.length>95000?profileJSONFull.substring(0,95000):profileJSONFull;
   try{
     const res=await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}`,{
       method:'POST',
@@ -405,21 +405,12 @@ async function saveToAirtable(p){
         'Submitted At':new Date().toISOString(),
         'Money Archetype':p.moneyArchetype,'Pressure Pattern':p.dominantPattern,
         'Profile JSON':profileJSON,
+        'Share Link':shareLink,
       }})
     });
     const data=await res.json();
-    if(!data.id){console.warn('Airtable POST failed:',JSON.stringify(data));return null;}
-    const shareLink=`${CONFIG.siteUrl}?id=${data.id}`;
-    const patch=await fetch(`https://api.airtable.com/v0/${CONFIG.airtableBaseId}/${encodeURIComponent(CONFIG.airtableTable)}/${data.id}`,{
-      method:'PATCH',
-      headers:{'Authorization':`Bearer ${CONFIG.airtableToken}`,'Content-Type':'application/json'},
-      body:JSON.stringify({fields:{'Share Link':shareLink}})
-    });
-    const patchData=await patch.json();
-    if(!patchData.id) console.warn('Airtable PATCH failed:',JSON.stringify(patchData));
-    return data.id;
-  }catch(e){console.warn('Airtable save failed:',e);}
-  return null;
+    if(!data.id) console.warn('Airtable save failed:',JSON.stringify(data));
+  }catch(e){console.warn('Airtable error:',e);}
 }
 
 // ── EMAILJS ───────────────────────────────────────────────────────────────────
@@ -440,12 +431,23 @@ async function computeAndShowResults(){
   document.getElementById('screen-quiz').style.display='none';
   const ov=document.createElement('div');ov.className='loading-overlay';ov.innerHTML='<div class="loading-spinner"></div><div class="loading-text">Building your profile...</div>';document.body.appendChild(ov);
   profile=computeProfile();
-  // Save to Airtable first to get the record ID → build short link
-  const recordId=await saveToAirtable(profile);
-  airtableRecordId=recordId||'';
-  const shareLink=recordId?`${CONFIG.siteUrl}?id=${recordId}`:`${CONFIG.siteUrl}`;
-  // Send email with the clean short link
-  await sendResultsEmail(profile,shareLink);
+  // Build share link immediately — no async dependency, always works
+  const sharePayload=btoa(unescape(encodeURIComponent(JSON.stringify({
+    n:userName,
+    r:profile.primaryRole,
+    r2:profile.secondaryRole,
+    pt:profile.profileType,
+    ma:profile.moneyArchetype,
+    dp:profile.dominantPattern,
+    vs:ROLES[profile.primaryRole].seat,
+    ip:profile.partnerMap[profile.primaryRole],
+  }))));
+  const shareLink=`${CONFIG.siteUrl}?p=${encodeURIComponent(sharePayload)}`;
+  // Fire email and Airtable in parallel — email has a working link immediately
+  await Promise.all([
+    sendResultsEmail(profile,shareLink),
+    saveToAirtable(profile,shareLink),
+  ]);
   document.body.removeChild(ov);
   renderResults(false,shareLink);
 }
